@@ -65,6 +65,9 @@ fleiss<-function(data,yi,ni){
 #####################################
 ## Apply the code to pups data
 #####################################
+
+## Pups data from the book in Table 15.1 (p. 443)
+
 pups<-data.frame(litter=c(seq(1,16)),
                  yi=c(12,11,10,9,10,9,9,8,8,4,7,4,5,3,3,0), 
                  ni=c(12,11,10,9,11,10,10,9,9,5,9,7,10,6,10,7))
