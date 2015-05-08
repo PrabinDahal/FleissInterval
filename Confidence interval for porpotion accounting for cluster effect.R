@@ -29,8 +29,8 @@ fleiss<-function(data,yi,ni){
   if(j$K>1){			
   # Use Fliess's if the aggregate data comes from >1 cluster else report standard interval using Wilson's method
       if(!is.null(j)){
-      data$rho.com<-(data$yi*(data$yi-1))-(2*j$p*(data$ni-1)*data$yi)+(data$ni*(data$ni-1)*j$p*j$p) # Numerator of Equation (15.4)
-      data$rho.com.dn<-data$ni*(data$ni-1)*j$p*(1-j$p)						    # Denominator of Equation (15.4)	
+      data$rho.com<-(data$yi*(data$yi-1))-(2*j$p*(data$ni-1)*data$yi)+(data$ni*(data$ni-1)*j$p*j$p) # Top of Equation (15.4)
+      data$rho.com.dn<-data$ni*(data$ni-1)*j$p*(1-j$p)						    # Bottom of Equation (15.4)	
       rho.hat<-sum(data$rho.com)/sum(data$rho.com.dn)						    # Equation (15.4) evaluated
     } 
   
@@ -52,25 +52,22 @@ fleiss<-function(data,yi,ni){
     result<-as.data.frame(cbind(p,lower,upper,method="fleiss"))
     return(data.frame(result))
   }else{ 
-    # Wilson method outputs are numeric, whereas the fleiss output are characters. 
-    result<-data.frame(p=as.character(binom.confint(data$yi, data$ni, conf.level = 0.95, methods ="wilson")$mean),         # binom solution
+    # Wilson method outputs are numeric, whereas the fleiss output are characters. Solution using binom package. 
+    result<-data.frame(p=as.character(binom.confint(data$yi, data$ni, conf.level = 0.95, methods ="wilson")$mean),         
                        lower=as.character(binom.confint(data$yi, data$ni, conf.level = 0.95, methods = "wilson")$lower),
                        upper=as.character(binom.confint(data$yi, data$ni, conf.level = 0.95, methods = "wilson")$upper),
                        method=as.character(binom.confint(data$yi, data$ni, conf.level = 0.95, methods = "wilson")$method))
     return(merge(result,data.frame(method="wilson"),all=T))
   }
 } # End;Not run
-
 #####################################
 ## Apply the code to pups data
 #####################################
 ## Pups data from the book in Table 15.1 (p. 443)
-
 pups<-data.frame(litter=c(seq(1,16)),
                  yi=c(12,11,10,9,10,9,9,8,8,4,7,4,5,3,3,0), 
                  ni=c(12,11,10,9,11,10,10,9,9,5,9,7,10,6,10,7))
-  )
+  		)
 attach(pups)
-
 ## Apply the fuction
 fleiss(pups,yi,ni)
