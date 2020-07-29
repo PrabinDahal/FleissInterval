@@ -1,6 +1,6 @@
 ##########################################################################################################################
 ## Title          : Function to work out confidence interval for correlated proportions using method by Fleiss et al, 2003
-## Reference BooK : Fleiss, Levin and Paik.Statistical methods for rates and proportions. 2003. pp. 441-444.
+## Reference Book : Fleiss, Levin and Paik.Statistical methods for rates and proportions. 2003. pp. 441-444.
 ## Equations used : Equations 15.2, 15.3 and 15.4 on pages 441-444 of the book
 ## Version Date   : 08/05/15
 ## Example data   : pups surivival data from Table 15.1 (p443) from the book
@@ -61,7 +61,7 @@ fleiss<-function(data,yi,ni){
   }
 } # End;Not run
 #####################################
-## Apply the code to pups data
+## Application to pups data
 #####################################
 ## Pups data from the book in Table 15.1 (p. 443)
 pups<-data.frame(litter=c(seq(1,16)),
@@ -71,3 +71,5 @@ pups<-data.frame(litter=c(seq(1,16)),
 attach(pups)
 ## Apply the fuction
 fleiss(pups,yi,ni)
+
+# End (Not Run)
